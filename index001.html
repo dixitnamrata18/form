@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Signup Form</title>
     <style>
         html, body {
             height: 100%; /* Ensure full height */
@@ -15,14 +15,13 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-image: url('file:///Users/dixitnamrata18.68/Downloads/1d26c5b022c071fb8f1e3ae2f0f65ba9.gif'); /* Path to your GIF */
+            background-image: url('file:///Users/dixitnamrata18.68/Downloads/1d26c5b022c071fb8f1e3ae2f0f65ba9.gif'); /* Change this URL to your GIF location */
             background-size: cover; /* Cover the entire page */
             background-position: center; /* Center the background image */
             background-repeat: no-repeat; /* Do not repeat the image */
             display: flex; /* Use Flexbox for centering form */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
-            height: 100vh; /* Full viewport height */
         }
 
         form {
@@ -30,23 +29,22 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Specific width */
         }
 
         input, button {
             margin-top: 10px;
             margin-bottom: 5px;
-            padding: 8px;
+            padding: 10px; /* Slightly larger padding */
             font-size: 16px;
-            width: 80%; /* Uniform width */
+            width: calc(100% - 20px); /* Calculate width taking padding into account */
+            box-sizing: border-box; /* Include padding and border in the element's width */
             display: block; /* Ensure input and buttons are block level */
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .error, .success {
             color: red;
-            margin-top: 5px;
-            margin-bottom: 10px;
+            font-size: 12px;
         }
 
         .success {
@@ -60,8 +58,8 @@
     </style>
 </head>
 <body>
-    <h1>Sign Up</h1>
     <form id="signupForm">
+        <h1>Signup Form</h1> <!-- Title of the form -->
         <label for="username">Username:</label>
         <input type="text" id="username" required>
         <div class="error" id="usernameError">Username must be alphanumeric and at least 6 characters long.</div>
@@ -76,5 +74,37 @@
 
         <button type="submit" id="submitBtn" disabled>Sign Up</button>
     </form>
+
+    <script>
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const submitBtn = document.getElementById('submitBtn');
+
+        username.addEventListener('input', () => validateField(username, /^[a-zA-Z0-9]{6,}$/, 'usernameError'));
+        email.addEventListener('input', () => validateField(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'emailError'));
+        password.addEventListener('input', () => validateField(password, /.{8,}/, 'passwordError'));
+
+        function validateField(field, regex, errorId) {
+            const errorDiv = document.getElementById(errorId);
+            if (regex.test(field.value)) {
+                errorDiv.textContent = 'Valid!';
+                errorDiv.className = 'success';
+            } else {
+                errorDiv.textContent = field.validationMessage;
+                errorDiv.className = 'error';
+            }
+            checkFormValidity();
+        }
+
+        function checkFormValidity() {
+            submitBtn.disabled = !(username.validity.valid && email.validity.valid && password.validity.valid &&
+                                   /^[a-zA-Z0-9]{6,}$/.test(username.value) &&
+                                   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value) &&
+                                   /.{8,}/.test(password.value));
+        }
+    </script>
 </body>
 </html>
+
+
