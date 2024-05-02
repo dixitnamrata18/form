@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        html, body {
+            height: 100%; /* Ensure full height */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            overflow: hidden; /* Hide scrollbars if the content exceeds viewport */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('file:///Users/dixitnamrata18.68/Downloads/1d26c5b022c071fb8f1e3ae2f0f65ba9.gif'); /* Path to your GIF */
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            display: flex; /* Use Flexbox for centering form */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            padding: 8px;
+            font-size: 16px;
+            width: 80%; /* Uniform width */
+            display: block; /* Ensure input and buttons are block level */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .error, .success {
+            color: red;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form id="signupForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+        <div class="error" id="usernameError">Username must be alphanumeric and at least 6 characters long.</div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <div class="error" id="emailError">Email address must be in a valid format.</div>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <div class="error" id="passwordError">Password must be at least 8 characters long.</div>
+
+        <button type="submit" id="submitBtn" disabled>Sign Up</button>
+    </form>
+</body>
+</html>
